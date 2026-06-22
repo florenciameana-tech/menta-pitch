@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menta — Pitch 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=Lexend:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+  <style>
+    /* ═══════════════════════════════════════════════════
+       DESIGN TOKENS — Digital Hearth / Menta
+    ═══════════════════════════════════════════════════ */
+    :root {
+      --p:   #2C6956;   /* primary */
+      --h:   #A8E6CF;   /* hero */
+      --s:   #376285;   /* secondary */
+      --bg:  #FBF9F5;   /* surface */
+      --sl:  #F0EDE8;   /* surface low */
+      --sh:  #E8F5EF;   /* surface high */
+      --w:   #E07B39;   /* warning */
+      --t:   #1A1A1A;   /* text */
+      --ts:  #4A4A4A;   /* text soft */
+      --fd:  'Plus Jakarta Sans', sans-serif;
+      --fb:  'Lexend', sans-serif;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       REVEAL RESETS
+    ═══════════════════════════════════════════════════ */
+    .reveal { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+    .reveal .slides { background: #FBF9F5 !important; }
+    .reveal .slides > section {
+      background: transparent !important;
+      padding: 0 !important;
+      text-align: left;
+      overflow: hidden;
+    }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4,
+    .reveal p, .reveal ul, .reveal li, .reveal blockquote {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0; padding: 0;
+      color: inherit; line-height: normal;
+    }
+    .reveal .progress { height: 3px; background: rgba(168,230,207,0.2); }
+    .reveal .progress span { background: #A8E6CF; }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE WRAPPER  — all visual composition lives here
+    ═══════════════════════════════════════════════════ */
+    .sw {
+      position: relative;
+      width: 100%;
+      height: 700px;
+      overflow: hidden;
+      font-family: 'Lexend', sans-serif;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CHIP
+    ═══════════════════════════════════════════════════ */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E8F5EF;
+      color: #2C6956;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       PHONE MOCKUP — CSS-only, no external image
+    ═══════════════════════════════════════════════════ */
+    .pm {
+      position: relative;
+      background: #0D0D0D;
+      border-radius: 44px;
+      padding: 14px;
+      box-sizing: border-box;
+      box-shadow:
+        inset 0 0 0 2px #2a2a2a,
+        0 32px 80px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .pm-lg { width: 220px; height: 460px; }
+    .pm-md { width: 190px; height: 397px; border-radius: 38px; padding: 12px; }
+    .pm-sm { width: 170px; height: 355px; border-radius: 34px; padding: 11px; }
+
+    .pm-notch {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 24px;
+      background: #0D0D0D;
+      border-radius: 0 0 16px 16px;
+      z-index: 10;
+    }
+    .pm-md .pm-notch { top: 12px; width: 70px; height: 20px; }
+    .pm-sm .pm-notch { top: 11px; width: 60px; height: 18px; }
+
+    .pm-screen {
+      width: 100%; height: 100%;
+      border-radius: 32px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .pm-md .pm-screen { border-radius: 28px; }
+    .pm-sm .pm-screen { border-radius: 24px; }
+
+    /* ═══════════════════════════════════════════════════
+       GLASSMORPHISM CARD
+    ═══════════════════════════════════════════════════ */
+    .glass {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 36px;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ═══════════════════════════════════════════
+         S1 — PORTADA
+         Fondo: grad-dark. Logo + título + tagline
+         como fragmentos escalonados.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background: linear-gradient(135deg, #1B4332 0%, #2C6956 60%, #1a3a2a 100%);">
+
+        <!-- BG decorative: radial blob top-right -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 80% 15%,
+            rgba(168,230,207,0.22) 0%, transparent 55%);
+        "></div>
+
+        <!-- CONTENT: centered column -->
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; flex-direction:column;
+          align-items:center; justify-content:center;
+          text-align:center;
+        ">
+          <!-- Logo — fragment 0 -->
+          <img
+            src="logo menta.png"
+            alt="Logo Menta"
+            style="
+              width:96px; height:96px;
+              border-radius:50%;
+              object-fit:contain;
+              box-shadow: 0 0 48px rgba(168,230,207,0.3);
+              margin-bottom:36px;
+            "
+          />
+
+          <!-- Menta — fragment 1 -->
+          <div
+            style="
+              font-family:'Plus Jakarta Sans',sans-serif;
+              font-size:clamp(72px,9vw,108px);
+              font-weight:800;
+              color:#fff;
+              letter-spacing:-3px;
+              line-height:0.92;
+              margin-bottom:28px;
+            "
+          >Menta</div>
+
+          <!-- Tagline — fragment 2 -->
+          <div
+            style="
+              font-family:'Lexend',sans-serif;
+              font-size:20px; font-weight:300;
+              color:rgba(255,255,255,0.68);
+              line-height:1.65; max-width:400px;
+            "
+          >Tu compañero digital para explorar<br/>la inteligencia artificial</div>
+        </div>
+
+        <!-- Byline: bottom-center — fragment 2 -->
+        <div
+          style="
+            position:absolute; bottom:44px; left:0; right:0;
+            text-align:center; z-index:2;
+            font-family:'Lexend',sans-serif;
+            font-size:13px; font-weight:300;
+            color:rgba(255,255,255,0.32);
+            letter-spacing:0.06em;
+          "
+        >Florencia Meana | Kevin | Stefania | G2 | 2026</div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S2 — GANCHO
+         Full-bleed image. Overlay escuro degradado.
+         Sin fragments.
+    ═══════════════════════════════════════════ -->
+    <section style="padding:0; margin:0;">
+      <div class="sw" style="background:#E5F4F0; padding:0;">
+        <img
+          src="gancho.png"
+          style="
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
+            object-fit:cover;
+            object-position:center;
+            display:block;
+            z-index:0;
+          "
+        />
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S3 — EL PROBLEMA
+         Fondo: grad-light. Layout 2 col asimétrico.
+         Tarjeta glassmorphism oscura con la cita.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background: linear-gradient(135deg, #FBF9F5 0%, #E8F5EF 50%, #D8F3DC 100%);">
+
+        <!-- BG blob top-right -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(circle at 88% 18%,
+            rgba(168,230,207,0.38) 0%, transparent 52%);
+        "></div>
+
+        <!-- CONTENT: two columns -->
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; align-items:center;
+          padding:0 80px; gap:56px;
+        ">
+
+          <!-- LEFT 54% -->
+          <div style="flex: 0 0 54%;">
+            <div class="chip">✨ El Problema</div>
+
+            <div
+              style="
+                font-family:'Plus Jakarta Sans',sans-serif;
+                font-size:clamp(40px,5vw,62px);
+                font-weight:800; color:#2C6956;
+                letter-spacing:-2px; line-height:1.05;
+                margin-bottom:20px;
+              "
+            >Miedo a quedar<br/>afuera de la<br/>tecnología</div>
+
+            <div
+              style="
+                font-family:'Lexend',sans-serif;
+                font-size:18px; font-weight:300;
+                color:#4A4A4A; max-width:400px; line-height:1.75;
+              "
+            >Ansiedad por no entender, vergüenza de preguntar, sensación de que "esto no es para mí".</div>
+          </div>
+
+          <!-- RIGHT: glassmorphism quote card — fragment 3 -->
+          <div
+            style="
+              flex:1;
+              background:rgba(44,105,86,0.90);
+              backdrop-filter:blur(24px);
+              -webkit-backdrop-filter:blur(24px);
+              border-radius:28px; padding:40px;
+              box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+            "
+          >
+            <div style="
+              font-family:'Plus Jakarta Sans',sans-serif;
+              font-size:3.8rem; color:#A8E6CF;
+              line-height:0.55; margin-bottom:22px;
+              font-weight:800;
+            ">"</div>
+            <div style="
+              font-family:'Lexend',sans-serif;
+              font-style:italic; font-size:17px; font-weight:300;
+              color:rgba(255,255,255,0.88); line-height:1.8;
+              margin-bottom:24px;
+            ">Me da miedo la IA, pienso que hay una persona real del otro lado y no termino de entender cómo funciona, pero quiero estar actualizada.</div>
+            <div style="
+              font-family:'Plus Jakarta Sans',sans-serif;
+              font-size:12px; font-weight:700;
+              color:#A8E6CF; text-transform:uppercase;
+              letter-spacing:2px; line-height:1.6;
+            ">— Griselda, 68 años<br/>Jubilada, Buenos Aires</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S4 — PARA QUIÉN
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background:#FBF9F5;">
+
+        <!-- BG blob bottom-left -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 10% 95%,
+            rgba(168,230,207,0.28) 0%, transparent 52%);
+        "></div>
+
+        <!-- CONTENT: two columns -->
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; align-items:center;
+          padding:0 80px; gap:52px;
+        ">
+
+          <!-- LEFT 40% -->
+          <div style="flex:0 0 40%;">
+            <div class="chip">✨ El Usuario</div>
+
+            <div
+              style="
+                font-family:'Plus Jakarta Sans',sans-serif;
+                font-size:clamp(28px,3.5vw,44px);
+                font-weight:800; color:#2C6956;
+                letter-spacing:-1px; line-height:1.1;
+                margin-bottom:16px;
+              "
+            >El Explorador<br/>Vulnerable</div>
+
+            <div
+              style="
+                font-family:'Lexend',sans-serif;
+                font-size:15px; font-weight:300;
+                color:#4A4A4A; line-height:2.1;
+              "
+            >68 años · jubilada<br/>Buenos Aires · ama de casa</div>
+
+            <!-- arquetipo image — editorial, rotated -->
+            <div style="
+              width:240px; height:320px;
+              border-radius:28px; overflow:hidden;
+              transform:rotate(-2deg);
+              box-shadow: 0 24px 64px rgba(44,105,86,0.2);
+              flex-shrink:0; margin-top:16px;
+            ">
+              <img src="arquetipo.png" style="width:100%; height:100%; object-fit:cover; object-position:top;" alt="Arquetipo" />
+            </div>
+          </div>
+
+          <!-- RIGHT: stacked cards — fragment 3 -->
+          <div
+            style="flex:1; display:flex; flex-direction:column; gap:14px;"
+          >
+            <!-- Frustración -->
+            <div style="
+              background:#F0EDE8; border-radius:20px;
+              padding:28px 32px;
+              box-shadow: 0 12px 32px rgba(44,105,86,0.08);
+            ">
+              <div style="
+                font-family:'Lexend',sans-serif;
+                font-size:11px; font-weight:500;
+                text-transform:uppercase; letter-spacing:2px;
+                color:#E07B39; margin-bottom:12px;
+              ">Frustración</div>
+              <div style="
+                font-family:'Lexend',sans-serif;
+                font-size:17px; font-weight:300;
+                color:#4A4A4A; line-height:1.65;
+              ">Miedo al error irreversible. Sensación de ser "un estorbo" cuando pide ayuda.</div>
+            </div>
+
+            <!-- Objetivo -->
+            <div style="
+              background:#E8F5EF; border-radius:20px;
+              padding:28px 32px;
+              box-shadow: 0 12px 32px rgba(44,105,86,0.08);
+            ">
+              <div style="
+                font-family:'Lexend',sans-serif;
+                font-size:11px; font-weight:500;
+                text-transform:uppercase; letter-spacing:2px;
+                color:#2C6956; margin-bottom:12px;
+              ">Objetivo</div>
+              <div style="
+                font-family:'Lexend',sans-serif;
+                font-size:17px; font-weight:300;
+                color:#4A4A4A; line-height:1.65;
+              ">Utilizar la tecnología para potenciar proyectos personales con autonomía.</div>
+            </div>
+
+            <div style="
+              font-family:'Lexend',sans-serif;
+              font-size:13px; font-weight:300;
+              color:#4A4A4A; opacity:0.5;
+              letter-spacing:0.04em; margin-top:4px;
+            ">5 entrevistas · 12 horas de campo</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S5 — DEL INSIGHT AL RETO
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background: linear-gradient(135deg, #FBF9F5 0%, #E8F5EF 50%, #D8F3DC 100%);">
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 85% 20%,
+            rgba(168,230,207,0.30) 0%, transparent 50%);
+        "></div>
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; flex-direction:column; justify-content:center;
+          align-items:center;
+          padding:52px 80px;
+        ">
+          <div class="chip">✨ Insight + HMW</div>
+          <div style="
+            font-family:'Plus Jakarta Sans',sans-serif;
+            font-size:clamp(36px,4vw,52px);
+            font-weight:800; color:#2C6956;
+            letter-spacing:-1px; line-height:1.1;
+            margin-bottom:32px; text-align:center;
+          ">Del insight al reto</div>
+          <div style="display:flex; flex-direction:column; gap:20px; width:100%; max-width:680px;">
+            <div style="background:#F0EDE8; border-radius:20px; padding:28px 32px; box-shadow: 0 12px 32px rgba(44,105,86,0.08);">
+              <div style="font-family:'Lexend',sans-serif; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:2px; color:#E07B39; margin-bottom:12px;">Insight</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:19px; font-weight:300; color:#4A4A4A; line-height:1.65;">Problemas con la aceptación de la IA o a lo desconocido</div>
+            </div>
+            <div style="background:#E8F5EF; border-radius:20px; padding:28px 32px; box-shadow: 0 12px 32px rgba(44,105,86,0.08);">
+              <div style="font-family:'Lexend',sans-serif; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:2px; color:#2C6956; margin-bottom:12px;">HMW</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:17px; font-weight:300; color:#4A4A4A; line-height:1.75;">¿Cómo podríamos ayudar a jubilados con voluntad de aprender pero con autoestima digital frágil, a distinguir claramente entre lo que hacen ellos y lo que hace la tecnología, para que mantengan su sensación de autonomía sin sentir que están siendo reemplazados?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S6 — LA SOLUCIÓN
+         Phone mockup flotando derecha, detrás del
+         texto. Composición en capas.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background:#E5F4F0;padding:0;overflow:hidden;position:relative;">
+        <div style="display:grid;grid-template-columns:48% 52%;width:100%;height:100%;background:#E5F4F0;overflow:hidden;position:absolute;top:0;left:0;">
+
+          <!-- COLUMNA IZQUIERDA -->
+          <div style="display:flex;flex-direction:column;justify-content:center;padding:48px 32px 48px 56px;box-sizing:border-box;height:100%;overflow:hidden;">
+
+            <div style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.7);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:#2C6956;letter-spacing:2px;text-transform:uppercase;width:fit-content;margin-bottom:14px;">✨ LA SOLUCIÓN</div>
+
+            <div style="font-size:80px;font-weight:800;color:#2C6956;line-height:1;letter-spacing:-3px;margin-bottom:16px;">Menta</div>
+
+            <p style="font-size:17px;line-height:1.6;color:#4A4A4A;margin:0 0 24px 0;max-width:95%;">Resolvemos el miedo a la IA a través de un aprendizaje digital que explora cómo son las plataformas más populares, para ayudar a jubilados a perder el miedo, entrar en confianza y estar actualizados.</p>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;">
+
+              <div style="background:rgba(255,255,255,0.85);border-radius:16px;padding:16px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+                <span style="font-size:26px;">🧭</span>
+                <span style="font-size:14px;font-weight:700;color:#2C6956;line-height:1.3;">UX súper accesible</span>
+                <span style="font-size:12px;color:#4A4A4A;line-height:1.5;">Se entiende a simple vista qué hacer en cada caso.</span>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.85);border-radius:16px;padding:16px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+                <span style="font-size:26px;">📚</span>
+                <span style="font-size:14px;font-weight:700;color:#2C6956;line-height:1.3;">Te Guía</span>
+                <span style="font-size:12px;color:#4A4A4A;line-height:1.5;">Te enseña la forma correcta de aprender sobre IA.</span>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.85);border-radius:16px;padding:16px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+                <span style="font-size:26px;">🏆</span>
+                <span style="font-size:14px;font-weight:700;color:#2C6956;line-height:1.3;">Gamificación Destacada</span>
+                <span style="font-size:12px;color:#4A4A4A;line-height:1.5;">Celebra tus logros y mide tu progreso.</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA -->
+          <div style="position:relative;height:100%;overflow:hidden;background:#E5F4F0;display:flex;align-items:center;justify-content:center;padding:24px;">
+            <img src="mockup-2.png" style="height:100%;width:auto;object-fit:contain;display:block;"/>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S6 — ROL DE LA IA
+         Dark slide. Título centrado.
+         Dos columnas glassmorphism.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background: linear-gradient(135deg, #1B4332 0%, #2C6956 60%, #1a3a2a 100%);">
+
+        <!-- BG blob bottom-left -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 15% 85%,
+            rgba(168,230,207,0.12) 0%, transparent 48%);
+        "></div>
+
+        <!-- CONTENT -->
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; flex-direction:column; justify-content:center;
+          padding:56px 80px; gap:36px;
+        ">
+
+          <!-- Title centered — fragment 0 -->
+          <div
+            style="
+              font-family:'Plus Jakarta Sans',sans-serif;
+              font-size:clamp(36px,4.5vw,54px);
+              font-weight:800; color:#fff;
+              letter-spacing:-1px; line-height:1.1;
+              text-align:center;
+            "
+          >La IA propone. El equipo decide.</div>
+
+          <!-- Two columns -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+            <!-- IA column — fragment 1 -->
+            <div
+              class="glass"
+            >
+              <div style="
+                font-family:'Plus Jakarta Sans',sans-serif;
+                font-size:11px; font-weight:700;
+                text-transform:uppercase; letter-spacing:3px;
+                color:#A8E6CF; margin-bottom:22px;
+              ">La IA hizo</div>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;">
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Búsqueda de problemas y soluciones
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Generación de prototipo y arquetipo
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Transcripción de entrevistas
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Creación del MVP inicial
+                </li>
+              </ul>
+            </div>
+
+            <!-- Equipo column — fragment 2 -->
+            <div
+              class="glass"
+            >
+              <div style="
+                font-family:'Plus Jakarta Sans',sans-serif;
+                font-size:11px; font-weight:700;
+                text-transform:uppercase; letter-spacing:3px;
+                color:rgba(255,255,255,0.45); margin-bottom:22px;
+              ">El equipo decidió</div>
+              <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;">
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Qué ideas tomar y cuáles descartar
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Dar forma final al contenido
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Validar las entrevistas
+                </li>
+                <li style="font-family:'Lexend',sans-serif; font-size:16px; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.5; padding-left:20px; position:relative;">
+                  <span style="position:absolute; left:0; color:#A8E6CF; font-size:1.1rem; line-height:1.3;">·</span>
+                  Ajustar y corregir el prototipo
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S7 — VALIDACIÓN
+         Stats band tonal. Antes/después tonal.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background: linear-gradient(135deg, #FBF9F5 0%, #E8F5EF 50%, #D8F3DC 100%);">
+
+        <!-- BG blob top-right -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 88% 8%,
+            rgba(168,230,207,0.42) 0%, transparent 50%);
+        "></div>
+
+        <!-- CONTENT -->
+        <div style="
+          position:relative; z-index:2;
+          height:100%;
+          display:flex; flex-direction:column; justify-content:center;
+          padding:48px 80px; gap:26px;
+        ">
+
+          <!-- Title — fragment 0 -->
+          <div
+            style="
+              font-family:'Plus Jakarta Sans',sans-serif;
+              font-size:clamp(36px,4vw,52px);
+              font-weight:800; color:#2C6956;
+              letter-spacing:-1px; line-height:1.1;
+            "
+          >Evidencia de uso real</div>
+
+          <!-- Stats band — fragment 1 -->
+          <div
+            style="
+              background:#E8F5EF; border-radius:24px;
+              padding:30px 40px;
+              display:grid;
+              grid-template-columns: 1fr 20px 1fr 20px 1fr;
+              align-items:center;
+              box-shadow: 0 12px 32px rgba(44,105,86,0.08);
+            "
+          >
+            <div style="text-align:center;">
+              <div data-counter="5" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:80px; font-weight:800; color:#2C6956; letter-spacing:-3px; line-height:1;">5</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:12px; font-weight:400; color:#4A4A4A; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">usuarios reales</div>
+            </div>
+            <!-- dot separator — tonal, not 1px line -->
+            <div style="width:6px; height:6px; border-radius:50%; background:rgba(44,105,86,0.2); margin:0 auto;"></div>
+            <div style="text-align:center;">
+              <div data-counter="100" data-suffix="%" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:80px; font-weight:800; color:#2C6956; letter-spacing:-3px; line-height:1;">100%</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:12px; font-weight:400; color:#4A4A4A; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">completaron la tarea</div>
+            </div>
+            <!-- dot separator -->
+            <div style="width:6px; height:6px; border-radius:50%; background:rgba(44,105,86,0.2); margin:0 auto;"></div>
+            <div style="text-align:center;">
+              <div data-counter="3" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:80px; font-weight:800; color:#2C6956; letter-spacing:-3px; line-height:1;">3</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:12px; font-weight:400; color:#4A4A4A; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">iteraciones del MVP</div>
+            </div>
+          </div>
+
+          <!-- Before/After — fragment 2 -->
+          <div
+            style="display:grid; grid-template-columns:1fr 1fr; gap:16px;"
+          >
+            <div style="background:#F0EDE8; border-radius:16px; padding:24px; box-shadow: 0 12px 32px rgba(44,105,86,0.06);">
+              <div style="font-family:'Lexend',sans-serif; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:2px; color:#E07B39; margin-bottom:10px;">❌ Antes (V1)</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:17px; font-weight:300; color:#4A4A4A; line-height:1.6;">"No se entendía de qué trataba el aprendizaje"</div>
+            </div>
+            <div style="background:#E8F5EF; border-radius:16px; padding:24px; box-shadow: 0 12px 32px rgba(44,105,86,0.06);">
+              <div style="font-family:'Lexend',sans-serif; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:2px; color:#2C6956; margin-bottom:10px;">✅ Después (V2)</div>
+              <div style="font-family:'Lexend',sans-serif; font-size:17px; font-weight:300; color:#4A4A4A; line-height:1.6;">"Comenzar a aprender de IA" — claro de inmediato</div>
+            </div>
+          </div>
+
+          <div style="font-family:'Lexend',sans-serif; font-size:13px; font-weight:300; color:#4A4A4A; opacity:0.5; letter-spacing:0.04em;">
+            Herramienta: Lyssna
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S8 — ÉTICA
+         Layout asimétrico 38/58.
+         Cards tonal sin líneas.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background:#FBF9F5;">
+
+        <!-- BG blob bottom-right -->
+        <div style="
+          position:absolute; inset:0; z-index:0;
+          background: radial-gradient(ellipse at 92% 85%,
+            rgba(168,230,207,0.22) 0%, transparent 50%);
+        "></div>
+
+        <!-- CONTENT -->
+        <div style="display:grid;grid-template-columns:38% 62%;width:100%;height:100%;background:#FBF9F5;overflow:hidden;position:absolute;top:0;left:0;">
+
+          <!-- COLUMNA IZQUIERDA: título -->
+          <div style="display:flex;flex-direction:column;justify-content:center;padding:48px 32px 48px 56px;box-sizing:border-box;height:100%;">
+            <div style="display:inline-flex;align-items:center;background:#E8F5EF;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:#2C6956;letter-spacing:2px;text-transform:uppercase;width:fit-content;margin-bottom:20px;">✨ DISEÑO RESPONSABLE</div>
+            <div style="font-size:52px;font-weight:800;color:#2C6956;line-height:1.1;letter-spacing:-2px;">Un sesgo identificado, un plan concreto</div>
+          </div>
+
+          <!-- COLUMNA DERECHA: cards -->
+          <div style="display:flex;flex-direction:column;justify-content:center;padding:48px 56px 48px 24px;box-sizing:border-box;height:100%;gap:16px;">
+
+            <div style="background:#F0EDE8;border-radius:20px;padding:24px 28px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#E07B39;border-radius:20px 0 0 20px;"></div>
+              <div style="font-size:11px;font-weight:700;color:#E07B39;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-left:8px;">SESGO IDENTIFICADO — HISTÓRICO</div>
+              <div style="font-size:15px;color:#4A4A4A;line-height:1.6;padding-left:8px;">Las recomendaciones de contenido se basan en el comportamiento de otros usuarios. Esto afecta a adultos mayores que avanzan más lento o abandonan antes, ya que el sistema no sigue sus patrones reales.</div>
+            </div>
+
+            <div style="background:#E8F5EF;border-radius:20px;padding:24px 28px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#2C6956;border-radius:20px 0 0 20px;"></div>
+              <div style="font-size:11px;font-weight:700;color:#2C6956;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-left:8px;">MITIGACIÓN</div>
+              <div style="font-size:15px;color:#4A4A4A;line-height:1.6;padding-left:8px;">Talleres presenciales en centros comunitarios: aprender haciendo, en contexto, con acompañamiento real.</div>
+            </div>
+
+            <div style="background:#E8F5EF;border-radius:20px;padding:24px 28px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#376285;border-radius:20px 0 0 20px;"></div>
+              <div style="font-size:11px;font-weight:700;color:#376285;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-left:8px;">TRANSPARENCIA DE DATOS</div>
+              <div style="font-size:15px;color:#4A4A4A;line-height:1.6;padding-left:8px;">Para nuestra app solo pedimos un mail para el login. No pedimos más datos personales.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         S9 — NEGOCIO
+         Layout 50/46. Fases + tabla comparativa.
+    ═══════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════
+         S11 — DEMO + CIERRE
+         Dark slide. Fan de mockups CSS izquierda.
+         Mensaje de cierre derecha.
+    ═══════════════════════════════════════════ -->
+    <section>
+      <div class="sw" style="background:#1B4332; position:relative; overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:#1B4332;display:grid;grid-template-columns:50% 50%;overflow:hidden;">
+
+          <!-- Decorativos: manchas de luz -->
+          <div style="position:absolute;top:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(168,230,207,0.12) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+          <div style="position:absolute;bottom:-80px;right:48%;width:350px;height:350px;background:radial-gradient(circle,rgba(168,230,207,0.07) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+          <div style="position:absolute;top:20%;right:0;width:300px;height:300px;background:radial-gradient(circle,rgba(168,230,207,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+
+          <!-- COLUMNA IZQUIERDA: 3 mockups -->
+          <div style="position:relative;height:100%;display:flex;align-items:center;justify-content:center;overflow:visible;z-index:1;">
+
+            <!-- Mockup izquierda -->
+            <img src="mockup-1.png" style="position:absolute;left:60px;top:50%;transform:translateY(-50%) rotate(-10deg);height:70%;width:auto;object-fit:contain;z-index:1;filter:drop-shadow(0 24px 48px rgba(0,0,0,0.55));"/>
+
+            <!-- Mockup centro -->
+            <img src="mockup-2.png" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(0deg);height:82%;width:auto;object-fit:contain;z-index:3;filter:drop-shadow(0 32px 64px rgba(0,0,0,0.65));"/>
+
+            <!-- Mockup derecha -->
+            <img src="mockup-3.png" style="position:absolute;right:40px;top:50%;transform:translateY(-50%) rotate(10deg);height:70%;width:auto;object-fit:contain;z-index:1;filter:drop-shadow(0 24px 48px rgba(0,0,0,0.55));"/>
+
+          </div>
+
+          <!-- COLUMNA DERECHA: contenido de cierre -->
+          <div style="display:flex;flex-direction:column;justify-content:center;padding:56px 64px 56px 40px;box-sizing:border-box;height:100%;position:relative;z-index:5;">
+
+            <!-- Logo -->
+            <img src="logo menta.png" alt="Menta" style="width:56px;height:56px;border-radius:50%;object-fit:contain;box-shadow:0 0 32px rgba(168,230,207,0.4);margin-bottom:28px;flex-shrink:0;"/>
+
+            <!-- Frase principal -->
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#FFFFFF;line-height:1.15;letter-spacing:-1.5px;margin-bottom:16px;">"La IA no debería ser<br>solo para los que<br>ya saben."</div>
+
+            <!-- Frase secundaria -->
+            <div style="font-family:'Lexend',sans-serif;font-size:19px;color:#A8E6CF;line-height:1.5;margin-bottom:28px;font-weight:400;">Menta existe para los que quieren aprender.</div>
+
+            <!-- Separador -->
+            <div style="width:100%;height:1px;background:rgba(255,255,255,0.15);margin-bottom:24px;"></div>
+
+            <!-- Pills fases -->
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
+              <div style="background:rgba(168,230,207,0.12);border:1px solid rgba(168,230,207,0.25);border-radius:100px;padding:6px 16px;font-family:'Lexend',sans-serif;font-size:12px;color:#A8E6CF;letter-spacing:0.5px;">Fase 1 · Módulo gratuito + suscripción mensual.</div>
+              <div style="background:rgba(168,230,207,0.12);border:1px solid rgba(168,230,207,0.25);border-radius:100px;padding:6px 16px;font-family:'Lexend',sans-serif;font-size:12px;color:#A8E6CF;letter-spacing:0.5px;">Fase 2 · Licencias para municipios interesados.</div>
+            </div>
+
+            <!-- Link demo -->
+            <a href="https://guia-simple-digital.lovable.app" target="_blank" style="display:flex;align-items:center;gap:12px;margin-bottom:24px;background:rgba(168,230,207,0.08);border-radius:14px;padding:14px 18px;border:1px solid rgba(168,230,207,0.15);text-decoration:none;">
+              <div style="width:32px;height:32px;background:#A8E6CF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:#1B4332;font-weight:700;flex-shrink:0;">→</div>
+              <div>
+                <div style="font-family:'Lexend',sans-serif;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;">DEMO EN VIVO</div>
+                <div style="font-family:'Lexend',sans-serif;font-size:14px;color:#A8E6CF;font-weight:600;letter-spacing:0.3px;">guia-simple-digital.lovable.app</div>
+              </div>
+            </a>
+
+            <!-- Gracias -->
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;color:#FFFFFF;font-weight:700;letter-spacing:0.5px;">🌿 Gracias.</div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  function animateCounters(slide) {
+    slide.querySelectorAll('[data-counter]').forEach(function(el) {
+      var target = parseInt(el.getAttribute('data-counter'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 900;
+      var start = null;
+      var from = 0;
+      el.textContent = from + suffix;
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(from + (target - from) * ease) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  Reveal.initialize({
+    transition:      'fade',
+    transitionSpeed: 'slow',
+    controls:        false,
+    progress:        true,
+    hash:            true,
+    center:          false,
+    width:           1280,
+    height:          700,
+    navigationMode:  'linear'
+  });
+
+  Reveal.on('slidechanged', function(e) {
+    animateCounters(e.currentSlide);
+  });
+  Reveal.on('ready', function(e) {
+    animateCounters(e.currentSlide);
+  });
+</script>
+</body>
+</html>
